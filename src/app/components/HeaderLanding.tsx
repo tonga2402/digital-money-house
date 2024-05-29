@@ -1,30 +1,19 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
 import Logo from '../UI-KIT/LogoLandingPage.png'
 import { useRouter } from 'next/navigation'
+import { useAuthContext } from '../contexts/authContext'
 
 
 
 const HeaderLanding = () => {
 
   const router = useRouter()
-  const [isToken , setIsToken] = useState<boolean>(true)
+  const { isLoggedIn, logout } = useAuthContext()
 
   const goToLink = (href:string) => {
     router.push(href)
-  }
-
-  useEffect(()=>{
-    localStorage.getItem('token') && setIsToken(true)
-  },[isToken])
-
-
-  const closeSesion = () => {
-    localStorage.removeItem('token');
-    setIsToken(false)
-    router.refresh()
   }
 
   return (
@@ -35,8 +24,10 @@ const HeaderLanding = () => {
         </Link>
       </div>
       <div style={{ display: "flex", gap: "20px" }}>
-        {isToken ? (
-          <button onClick={() => closeSesion()} className="button_responsive">Cerrar Sesión</button>
+        {isLoggedIn ? (
+          <button
+           onClick={()=>logout()} 
+           className="button_responsive">Cerrar Sesión</button>
         ) : (
           <>
             <button

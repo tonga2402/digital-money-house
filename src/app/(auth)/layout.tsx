@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import HeaderAuth from "../components/HeaderAuth";
+import AuthContextProvider from "../contexts/authContext";
 import './auth.css'
 
 
@@ -11,9 +12,11 @@ export default function AuthLayout({
   return (
     <html>
       <body>
-        <HeaderAuth />
-        {children}
-        <Footer />
+      <AuthContextProvider>
+          <HeaderAuth />
+          {children}
+          <Footer />
+        </AuthContextProvider>
       </body>
     </html>
   );

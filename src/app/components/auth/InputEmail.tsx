@@ -2,12 +2,10 @@
 
 import { useRouter } from "next/navigation"
 import { yupResolver } from "@hookform/resolvers/yup"
-import SubmitButton from './SubmitButton';
-
 import InputText from "./InputText"
 import { FormProvider, useForm } from "react-hook-form"
 import inputEmailSchema from "@/app/schemes/inputEmail.scheme";
-import { useState } from "react";
+import { BeatLoader } from "react-spinners"
 
 
 type InputEmailProps = {
@@ -24,7 +22,7 @@ const InputEmail = () => {
   const methods = useForm<InputEmailProps>({
     resolver: yupResolver(inputEmailSchema),
   })
-  const { handleSubmit ,formState: {errors} } = methods;
+  const { handleSubmit ,formState: {errors , isSubmitting} } = methods;
 
   const onSubmit = (data: InputEmailProps) => {
     console.log(data);
@@ -44,22 +42,29 @@ const InputEmail = () => {
               type={"email"}
               placeholder={"Correo electrónico"}
             />
-
-            <SubmitButton
-              label={"Continuar"}
-              styles={"button_responsive"}
-              onSubmit={onSubmit}
-            />
+            <button
+              className={"button_responsive"}
+              onClick={handleSubmit(onSubmit)}
+            >
+              {isSubmitting ? (
+                <BeatLoader color="black" size={10} />
+              ) : (
+                "Continuar"
+              )}
+            </button>
             <button
               className="button_input_grey"
               onClick={() => goToLink("/register")}
             >
               Crear Cuenta
             </button>
-            {errors && 
-              <span style={{ color: "red", fontStyle: "italic" , fontSize: '14px' }}>
-              {errors.email?.message}
-            </span>}
+            {errors && (
+              <span
+                style={{ color: "red", fontStyle: "italic", fontSize: "14px" }}
+              >
+                {errors.email?.message}
+              </span>
+            )}
           </div>
         </form>
       </div>

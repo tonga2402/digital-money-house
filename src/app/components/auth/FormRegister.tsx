@@ -2,13 +2,13 @@
 import React, {useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
-import SubmitButton from './SubmitButton';
 import InputText from './InputText';
 import formRegisterSchema from '@/app/schemes/formRegister.scheme';
 import { userRegister } from '@/app/services/auth/auth.api';
 import RegisterOk from '../RegisterOk';
 import { useRouter } from 'next/navigation';
 import { ConflictError } from '@/app/services/common/errors';
+import { BeatLoader } from 'react-spinners';
 
 type FormData = {
   firstname: string;
@@ -32,7 +32,7 @@ const FormRegister = () => {
 
   const {
     handleSubmit,
-    formState: { errors , isLoading},
+    formState: { errors , isSubmitting},
   } = methods;
 
 
@@ -204,12 +204,16 @@ const FormRegister = () => {
                     )}
                   </div>
                   <div className="InputText">
-                    <SubmitButton
-                      label={"Crear Cuenta"}
-                      styles={"button_responsive"}
-                      onSubmit={onSubmit}
-                      />
-                      {isLoading && <div> cargando</div>}
+                    <button
+                      className={"button_responsive"}
+                      onClick={handleSubmit(onSubmit)}
+                    >
+                      {isSubmitting ? (
+                        <BeatLoader color="black" size={10} />
+                      ) : (
+                        "Continuar"
+                      )}
+                    </button>
                     {serverError && (
                       <p
                         style={{

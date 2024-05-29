@@ -1,4 +1,4 @@
-import { LoginResponseType, RegisterResponseType } from "@/app/types/auth.types"
+import { AuthToken, RegisterResponseType } from "@/app/types/auth.types"
 import { AccessDeniedError } from "../common/errors";
 
 
@@ -6,7 +6,7 @@ const API_URL = 'https://digitalmoney.digitalhouse.com'
 
 
 
-export const authLogin  = async (data: object): Promise<LoginResponseType> => {
+export const authLogin  = async (data: object): Promise<AuthToken> => {
   const res = await fetch(`${API_URL}/api/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

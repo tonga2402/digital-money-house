@@ -1,7 +1,9 @@
+
 import type { Metadata } from "next";
 import "../globals.css";
 import Footer from "../components/Footer";
 import HeaderLanding from "../components/HeaderLanding";
+import AuthContextProvider from "../contexts/authContext";
 
 
 export const metadata: Metadata = {
@@ -17,9 +19,11 @@ export default function LandingPageLayout({
   return (
     <html lang="en">
       <body>
-        <HeaderLanding/>
-        {children}
-        <Footer />
+        <AuthContextProvider>
+          <HeaderLanding />
+          {children}
+          <Footer />
+        </AuthContextProvider>
       </body>
     </html>
   );
