@@ -12,7 +12,7 @@ type InputEmailProps = {
   email: string
 }
 
-const InputEmail = () => {
+const FormEmail = () => {
   const router = useRouter();
   const goToLink = (href: string) => {
     router.push(href);
@@ -72,4 +72,4 @@ const InputEmail = () => {
   );
 }
 
-export default InputEmail
+export default FormEmail;

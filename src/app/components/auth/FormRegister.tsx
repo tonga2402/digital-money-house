@@ -9,6 +9,7 @@ import RegisterOk from '../RegisterOk';
 import { useRouter } from 'next/navigation';
 import { ConflictError } from '@/app/services/common/errors';
 import { BeatLoader } from 'react-spinners';
+import InputPassword from './InputPassword';
 
 type FormData = {
   firstname: string;
@@ -148,11 +149,7 @@ const FormRegister = () => {
               <div className="grid_container">
                 <div className="flex_container">
                   <div className="InputText">
-                    <InputText
-                      type="password"
-                      fieldName={"password"}
-                      placeholder={"Contraseña*"}
-                    />
+                    <InputPassword fieldName={'password'} />
                     {errors && (
                       <p
                         style={{

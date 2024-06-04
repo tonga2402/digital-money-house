@@ -1,10 +1,10 @@
-import InputEmail from '@/app/components/auth/InputEmail';
+import FormEmail from '@/app/components/auth/FormEmail';
 import React from 'react'
 
 function EmailPage() {
   return (
     <section className="section_form">
-      <InputEmail />
+      <FormEmail />
     </section>
   );
 }
